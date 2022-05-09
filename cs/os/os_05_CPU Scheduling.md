@@ -242,3 +242,134 @@
 
 ![Turnaround Time Varies With Time Quantum](os_05_CPU Scheduling.assets/Turnaround Time Varies With Time Quantum.JPG)
 
+
+
+### Multilevel Queue
+
+![Multilevel Queue](os_05_CPU Scheduling.assets/Multilevel Queue.JPG)
+
+system processes : 시스템 프로세스
+
+interactive processes : 사람과 인터렉션하는 프로세스
+
+interactive editing processes
+
+batch processes : CPU만 오랫동안 사용하는 job
+
+student processes
+
+=> 우선순위는 변하지 않음.
+
+
+
+### Multilevel Queue
+
+- Ready Queue를 여러 개로 분할
+  - Foreground(Interactive) - RR
+  - Background(batch - no human Interactive) - FCFS
+- 각 큐는 독립적인 스케줄링 알고리즘을 가짐
+  - Foreground - RR
+  - Background- FCFS
+- 큐에 대한 스케줄링이 필요
+  - Fixed Priority Scheduling
+    - serve all from foreground then from background.
+    - Possibility of starvation.
+  - Time Slice 
+    - 각 큐에 CPU Time 적절한 비율로 할당 
+    - ex) 80% to Foreground in RR, 20% to Background in FCFS
+- 우선순위는 변하지 않기 때문에, 높은 것에만 주면 낮은 프로세스는 starvation의 문제가 생김. 여러 줄로 줄서기를 하면서 경우에 따라서 줄 간에 이동을 할 수 있는 스케줄링을 할 수 있음.
+
+
+
+### MultiLevel FeedBack Queue
+
+- 프로세스가 다른 큐로 이동 가능.
+- 에이징(Aging)을 이와 같은 방식으로 구현할 수 있다.
+- MultiLevel-FeedBack-Queue Scheduler를 정의하는 파라미터들
+  - Queue의 수
+  - 각 큐의 Scheduling Algorithm
+  - Process를 상위 큐로 보내는 기준
+  - Process를 하위 큐로 내쫓는 기준
+  - 프로세스가 CPU 서비스를 받으려 할때, 들어갈 큐를 결정하는 기준
+
+
+
+### Multilevel Feedback Queue
+
+![image-20220509153849698](os_05_CPU Scheduling.assets/image-20220509153849698.png)
+
+- CPU burst가 짧은 프로세스에게 우선순위를 더 많이 주고 긴 프로세스는 점점 밑으로 쫓겨나서 우선순위를 낮춰주는 방법
+- 처음에 들어온 프로세스에게는 무조건 짧은 시간을 주기 때문에, CPU 사용 시간이 긴지 짧은지의 예측이 필요 없음. 
+
+
+
+### Example of Multilevel Feedback Queue
+
+- Three queues:
+  - Q0 - time quantum 8 milliseconds
+  - Q1 - time quantum 16 milliseconds
+  - Q2 - FCFS
+- Scheduling
+  - new job이 queue Q0로 들어감
+  - CPU를 잡아서 할당 시간 8 milliseconds 동안 수행됨
+  - 8 milliseconds 동안 다 끝내지 못했으면 queue Q1으로 내려감
+  - Q1에 줄서서 기다렸다가 CPU를 잡아서 16 ms 동안 수행됨
+  - 16 ms에 끝내지 못한 경우 queue Q2로 쫓겨남
+
+
+
+### Multiple-Processor Scheduling
+
+- CPU가 여러 개인 경우 스케줄링은 더욱 복잡해짐.
+- Homogeneous Processor인 경우
+  - Queue에 한 줄로 세워서 각 프로세서가 알아서 꺼내가게 할 수 있다.
+  - 반드시 특정 프로세서에서 수행되어야 하는 프로세스가 있는 경우에는 문제가 더 복잡해짐.
+
+- Load Sharing
+  - 일부 프로세서에 job이 몰리지 않도록 부하를 적절히 공유하는 메커니즘이 필요
+  - 별개의 큐를 두는 방법 vs. 공동 큐를 사용하는 방법
+
+- Symmentic Multiprocessing(SMP)
+  - 각 프로세서가 각자 알아서 스케줄링 결정 (모든 CPU가 대등)
+
+- Asymmentic Multiprocessing
+  - 하나의 프로세서가 시스템 데이터의 접근과 공유를 책임지고 나머지 프로세서는 거기에 따름. (하나의 CPU가 전체적인 컨트롤을 담당)\
+
+
+
+### Real-Time Scheduling
+
+- Hard real-time Systems
+  - Hard real-time task는 정해진 시간 안에 반드시 끝내도록 스케줄링 해야 함
+
+- Soft real-time Systems
+  - Soft real-time task는 일반 프로세스에 비해 높은 Priority를 갖도록 해야 함 
+
+
+
+### Thread Scheduling
+
+- Local Scheduling
+  - User Level Thread의 경우 사용자 수준의 thread library에 의해 어떤 thread를 스케줄할지 결정 (사용자 프로세스가 직접 thread를 관리하고 운영체제는 thread를 모름-그 프로세스에게 CPU를 줄지 안줄지 프로세스 내부에서 결정)
+- Global Scheduling
+  - Kernel level thread의 경우 일반 프로세스와 마찬가지로 커널의 단기 스케줄러가 어떤 thread를 스케줄할지 결정 (운영체제가 thread를 이미 알고 있는 상황-운영체제가 결정)
+
+
+
+### Algorithm Evaluation
+
+- Queueing Models
+
+  - 확률 분포로 주어지는 arrival rate(도착률)와 service rate(처리율) 등을 통해 각종 performance index 값을 계산 (이론적)
+
+- Implementation (구현) & Measurement(성능 측정)
+
+  - 실제 시스템에 알고리즘을 구현하여 실제 작업(workload)에 대해 성능을 측정 비교 
+
+    (실제 시스템에 구현해서 돌려보고 성능 측정해 봄(실측))
+
+- Simulation(모의 실험)
+
+  - 알고리즘을 모의 프로그램으로 작성 후 trace를 입력으로 하여 결과를 비교 
+
+    (trace : 시뮬레이션 프로그램에 인풋으로 들어갈 데이터.)
