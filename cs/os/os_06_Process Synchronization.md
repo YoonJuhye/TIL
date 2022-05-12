@@ -84,7 +84,7 @@
 
 - n개의 프로세스가 공유 데이터를 동시에 사용하기를 원하는 경우
 
-- 각 프로세스의 code segment에는 공유 데이터를 접근하는 코드인 critical section (임계 구역)이 존재
+- 각 프로세스의 code segment에는 공유 데이터를 접근하는 코드인 **critical section** (임계 구역)이 존재
 
 - Problem
 
@@ -485,17 +485,17 @@ Block & Wakeup 방식의 구현 (=sleep lock)
 
 - 프로그래머가 동기화 제약 조건을 명시적으로 코딩할 필요가 없음
 
-- 프로세스가 모니터 안에서 기다릴 수 있도록 하기 위해 condition variable 사용
+- 프로세스가 모니터 안에서 기다릴 수 있도록 하기 위해 **condition variable** 사용
 
-  condition x, y;
+  **condition x, y;**
 
 - Condition variable 은 wait과 signal연산에 의해서만 접근 가능.
 
-  x.wait();
+  **x.wait();**
 
   x.wait()을 invoke한 프로세스는 다른 프로세스가 x.signal()을 invoke 하기 전까지 suspend된다
 
-  x.signal();
+  **x.signal();**
 
   x.signal()은 정확하게 하나의 suspend된 프로세스를 resume한다.
 
@@ -508,3 +508,6 @@ Block & Wakeup 방식의 구현 (=sleep lock)
 ### Bounded-Buffer Problem
 
 ![image-20220509214554409](os_06_Process Synchronization.assets/image-20220509214554409.png)
+
+![image-20220512021948980](os_06_Process Synchronization.assets/image-20220512021948980.png)
+
