@@ -1,5 +1,7 @@
 # Chapter 6. Process Synchronization
 
+## = Concurrency Control (병행 제어)
+
 ### 데이터의 접근
 
 ![image-20220509162106291](os_06_Process Synchronization.assets/image-20220509162106291.png)
@@ -270,7 +272,7 @@
     		S++;
     ```
 
-    - 반납하는 과정 (un-lock)
+    - 자원을 반납하는 과정 (un-lock)
 
 
 
@@ -378,7 +380,7 @@ Block & Wakeup 방식의 구현 (=sleep lock)
 
 
 
-### Classical Problems of Synchronization
+### Classical Problems of Synchronization (고전적인 문제)
 
 - Bounded-Buffer Problem (Producer-Consumer Problem)
 - Readers and Writers Problem
@@ -464,12 +466,14 @@ Block & Wakeup 방식의 구현 (=sleep lock)
 
 ### Monitor
 
+p연산과 v연산을 통해 프로세스 동기화를 하지만, 모니터는 동기화할 수 있는 방법을 프로그램에 알려주고 프로그램이 그것을 하는 것.
+
 - Semaphore의 문제점
 
   - 코딩하기 힘들다
   - 정확성 (correctness)의 입증이 어렵다
   - 자발적 협력(voluntary cooperation)이 필요하다
-  - 한 번의 실수가 모든 시스템에 치명적 영향
+  - 한 번의 실수가 모든 시스템에 치명적 영향 (동기화가 깨짐)
 
 - 예
 
@@ -477,11 +481,13 @@ Block & Wakeup 방식의 구현 (=sleep lock)
 
 - 동시 수행중인 프로세스 사이에서 abstract data type의 안전한 공유를 보장하기 위한 high-level synchronization construct
 
+  - 프로그램 안에서 동시접근하는 문제를 모니터가 자동으로 해결해줘서 프로그래머의 부담을 확연히 줄여줌
+
   ![image-20220509214339846](os_06_Process Synchronization.assets/image-20220509214339846.png)
 
 
 
-- 모니터 내에서는 한번에 하나의 프로세스만이 활동 가능
+- 모니터 내에서는 **한번에 하나의 프로세스만**이 활동 가능
 
 - 프로그래머가 동기화 제약 조건을 명시적으로 코딩할 필요가 없음
 
@@ -495,7 +501,7 @@ Block & Wakeup 방식의 구현 (=sleep lock)
 
   x.wait()을 invoke한 프로세스는 다른 프로세스가 x.signal()을 invoke 하기 전까지 suspend된다
 
-  **x.signal();**
+  **x.signal();** (깨우기)
 
   x.signal()은 정확하게 하나의 suspend된 프로세스를 resume한다.
 
@@ -503,11 +509,35 @@ Block & Wakeup 방식의 구현 (=sleep lock)
 
 ![image-20220509214652133](os_06_Process Synchronization.assets/image-20220509214652133.png)
 
+​	모니터가 알아서 제어해주기 때문에 굳이 들어가기 전에 lock을 걸고 나올 때 lock을 풀 이유가 없어짐. 
+
 
 
 ### Bounded-Buffer Problem
 
+공유 버퍼에 대해서 락을 걸거나 푸는 코드가 필요 없음
+
+full은 내용이 들어있는 버퍼 empty는 빈 버퍼를 기다리는 컨디션
+
+내용이 들어있는 버퍼를 기다리면서(소비자 버퍼) 잠들어있는 버퍼가 있으면 깨어줘라.
+
+세마포어보다 모니터버전이 훨씬 더 자연스러움
+
 ![image-20220509214554409](os_06_Process Synchronization.assets/image-20220509214554409.png)
 
 ![image-20220512021948980](os_06_Process Synchronization.assets/image-20220512021948980.png)
+
+세마포어에서는 lock을 거는 코드가 있고, 모니터 버전에서는 없음
+
+빈 버퍼가 없으면 잠들게 해라 라는 코드가 있으나 세마포어에서는 P연산을 해줌
+
+모니터에서는 시그널 연산, 세마포어에서는 V연산
+
+세마포어에서는 V연산을 해주면 내용이 들어있는 버퍼를 기다리는 소비자가 있으면 깨어주는 역할을 해야하고, 값을 가지면 V연산은 값의 변화가 항상 있으나 모니터에서는 잠들어있는 프로세스가 있으면 그냥 깨워라는 것이기때문에, 잠들어있는 프로세스가 없으면 값을 바꾸거나 아무 일도 발생하지 않음.
+
+
+
+### Dining Pilosophers Example - Monitor ver
+
+![image-20220515222717543](os_06_Process Synchronization.assets/image-20220515222717543.png)
 
