@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <div id="root"></div>
+  </body>
+  <script
+    src="https://unpkg.com/react@17.0.2/umd/react.development.js"
+    crossorigin
+  ></script>
+  <script
+    src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.development.js"
+    crossorigin
+  ></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    // button 리액트 컴포넌트 재사용
+    // 같은 스타일을 갖는 하나의 컴포넌트만 존재하고, 텍스트만 변경될 수 있게 하기
+    // ()에 argument를 갖는다. 이름은 마음대로 지을 수 있음
+    // props.btnText -> { btnText } : shortcut - property를 오브젝트로부터 꺼내는 것. props는 오브젝트이므로.
+    function Btn({ btnText, big }) {
+      return (
+        <button
+          style={{
+            backgroundColor: "tomato",
+            color: "white",
+            padding: "10px 20px",
+            border: 0,
+            borderRadius: 10,
+            fontSize: big ? 18 : 16,
+          }}
+        >
+          {btnText}
+        </button>
+      );
+    }
+
+    function App() {
+      return (
+        <div>
+          <Btn btnText="Save Changes" big={true} />
+          <Btn btnText="Continue" big={false} />
+        </div>
+      );
+    }
+    const root = document.getElementById("root");
+    ReactDOM.render(<App />, root);
+  </script>
+</html>
