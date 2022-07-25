@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <div id="root"></div>
+  </body>
+  <script
+    src="https://unpkg.com/react@17.0.2/umd/react.development.js"
+    crossorigin
+  ></script>
+  <script
+    src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.development.js"
+    crossorigin
+  ></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    const root = document.getElementById("root");
+    function App() {
+      let [counter, setCounter] = React.useState(0); // [현재 state 값, 업데이트 함수]
+      const onClick = () => {
+        // counter = counter + 1;
+        // console.log(counter);
+        setCounter(counter + 1);
+        // 함수를 이용해 컴포넌트의 state를 바꿀 때, 컴포넌트는 새로운 값을 가지고 다시 한번 렌더링 됨.
+      };
+      console.log("rendered");
+      console.log(counter);
+      return (
+        <div>
+          <h3>Total clicks: {counter}</h3>
+          <button onClick={onClick}>Click me</button>
+        </div>
+      );
+    }
+    ReactDOM.render(<App />, root);
+  </script>
+</html>

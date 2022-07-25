@@ -4,11 +4,11 @@
 | ------------------------------------------------------------ | ---------- | ---------------------------- |
 | 자바스크립트 1.  자바스크립트의 역사와 현재 그리고 미래      | 7/11 (월)  | https://youtu.be/wcsVjmHrUQg |
 | 자바스크립트 2. 콘솔에 출력, script async 와 defer의 차이점  | 7/12 (화)  | https://youtu.be/tJieVCgGzhs |
-| 자바스크립트 3. 데이터타입, data types, let vs var, hoisting | 7/17  (일) | https://youtu.be/OCCpGh4ujb8 |
-| 자바스크립트 4. 코딩의 기본 operator, if, for loop 코드리뷰 팁 |            |                              |
-| 자바스크립트 5. Arrow Function 함수의 선언과 표현            |            |                              |
-| 자바스크립트 6. 클래스와 오브젝트의 차이점, 객체지향 언어 클래스 |            |                              |
-| 자바스크립트 7. 오브젝트                                     |            |                              |
+| 자바스크립트 3. 데이터타입, data types, let vs var, hoisting | 7/13  (수) | https://youtu.be/OCCpGh4ujb8 |
+| 자바스크립트 4. 코딩의 기본 operator, if, for loop 코드리뷰 팁 | 7/14 (목)  |                              |
+| 자바스크립트 5. Arrow Function 함수의 선언과 표현            | 7/15 (금)  |                              |
+| 자바스크립트 6. 클래스와 오브젝트의 차이점, 객체지향 언어 클래스 | 7/17 (월)  |                              |
+| 자바스크립트 7. 오브젝트                                     | 7/18 (화)  |                              |
 | 자바스크립트 8. 자바스크립트 배열 개념과 APIs                |            |                              |
 | 자바스크립트 9. 10가지 배열함수, Array APIs                  |            |                              |
 | 자바스크립트 10. JSON 개념 정리와 활용방법 및 유용한 사이트  |            |                              |
@@ -62,6 +62,14 @@
 
 - 'use strict'; 를 사용하기 전에 선언해주면 좋음 (typestript를 사용할 때는 불필요함), 자바스크립트 엔진이 더 효율적으로 동작함.
 
+- Use strict
+
+  added in ES 5
+
+  Use this for Valina Javascript.
+
+  'use strict';
+
 ---
 
 
@@ -71,3 +79,58 @@
 - 프로그래밍 언어에서 가장 중요한 것
   - 입력, 연산, 출력
   - CPU에 최적화된 연산, 메모리 사용을 최소화
+
+#### Variable
+
+- let (added in ES6) : Mutable datatype
+- Block Scope : 블록 안에서 선언된 변수는 밖에서 접근할 수 없게 됨
+
+- var (don't ever use this!)
+  - var hoisting : 어디에 선언했느냐와 상관 없이 항상 제일 위로 선언을 끌어올려주는 것을 말함.
+  - 블록 스코핑이 없음. 어디에서나 접근 가능
+
+ 
+
+#### Constants
+
+- Const : immutable type
+
+- variable let은 포인터를 이용해서 값을 계속 변경할 수 있었음
+- 하지만, constants는 이 포인터가 잠겨있어서 할당 이후엔 절대 변경할 수 없음
+- favor immutable data type always for a few reasons:
+  - secruity
+  - Thread safety
+  - reduce human mistakes
+
+
+
+#### Variable types
+
+- primitive, single item: number, string, boolean, null, undefined, symbol
+- object, box container
+- Function, first-class function
+
+- 자바스크립트에서 value integer와 decimal number 차이 없이 type number로 출력됨
+- bigInt
+- string
+
+- null
+  - 비어있는 값이라고 지정하는 것 null로 값이 할당되어 있는것
+- Undefined
+  - 선언은 되어있지만, 아무런 값이 할당되지 않은 상태
+  - 텅 비어있는지, 아직 할당되지 않은 것인지 모름
+
+- Symbol, create unique identifiers for objects
+  - 동일한 string을 작성했어도 다른 심볼로 만들어지기 때문에 고유한 식별자를 만들 때 이용
+
+
+
+#### Dynamic typing
+
+- Dynamically typed language
+- 선언할 때 어떤 타입인지 선언하지 않고, runtime할 때 할당된 값에 따라서 값이 변경될 수 있음
+
+- typeError의 문제가 생길 수 있어서 생긴 게 TypeScript
+
+
+
