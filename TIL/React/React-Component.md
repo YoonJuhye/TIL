@@ -120,7 +120,7 @@ import Button from '../../components/Common/Button/Button';
 import BottomNavigation from '../../components/Common/BottomNavigation/BottomNavigation';
 import { useParams } from 'react-router-dom';
 import null_profile from '../../assets/null_profile_img.png';
-import article_img from '../../assets/article_img.jpg';
+import gallery_img from '../../assets/gallery_img.png';
 const ProfileUser = () => {
 	const { userId } = useParams();
 	return (
@@ -137,114 +137,172 @@ const ProfileUser = () => {
 				style={{
 					width: '100%',
 					height: '100%',
+					overflowY: 'scroll',
 				}}
 			>
-				{/* 프로필 바이오 */}
-				<div
-					css={css`
-						display: flex;
-						flex-direction: row;
-						justify-content: space-around;
-						align-items: center;
-					`}
-				>
-					<img src={null_profile} alt="" />
-					{/* 프로필 사진 옆 텍스트*/}
+				{/* 프로필 상단 - 바이오, 버튼 */}
+				<div>
+					{/* 프로필 바이오 */}
 					<div
 						css={css`
 							display: flex;
-							flex-direction: column;
+							flex-direction: row;
 							justify-content: center;
 							align-items: center;
 						`}
 					>
-						{/* 팔로워, 팔로잉 */}
+						<img
+							src={null_profile}
+							alt=""
+							css={css`
+								display: flex;
+								justify-content: center;
+								align-items: center;
+								width: 100px;
+								height: 100px;
+							`}
+						/>
+						{/* 프로필 사진 옆 텍스트*/}
 						<div
 							css={css`
 								display: flex;
-								flex-direction: row;
+								flex-direction: column;
 								justify-content: center;
-								padding: 10px;
+								align-items: center;
+								padding-left: 20px;
 							`}
 						>
-							{/* 팔로워 */}
+							{/* 팔로워, 팔로잉 */}
 							<div
 								css={css`
 									display: flex;
-									flex-direction: column;
-									align-items: center;
+									flex-direction: row;
+									justify-content: center;
 									padding: 10px;
 								`}
 							>
-								<span>602</span>
-								<span>Followers</span>
+								{/* 팔로워 */}
+								<div
+									css={css`
+										display: flex;
+										flex-direction: column;
+										align-items: center;
+										padding: 10px;
+									`}
+								>
+									<span className="fw-500 fs-24" style={{ lineHeight: '33.6px' }}>
+										602
+									</span>
+									<span className="fw-500 fs-16" style={{ lineHeight: '19.2px' }}>
+										Followers
+									</span>
+								</div>
+								{/* 팔로잉 */}
+								<div
+									css={css`
+										display: flex;
+										flex-direction: column;
+										align-items: center;
+										padding: 10px;
+									`}
+								>
+									<sapn className="fw-500 fs-24" style={{ lineHeight: '33.6px' }}>
+										290
+									</sapn>
+									<span className="fw-500 fs-16" style={{ lineHeight: '19.2px' }}>
+										Following
+									</span>
+								</div>
 							</div>
-							{/* 팔로잉 */}
-							<div
-								css={css`
-									display: flex;
-									flex-direction: column;
-									align-items: center;
-									padding: 10px;
-								`}
-							>
-								<sapn>290</sapn>
-								<span>Following</span>
+							{/* 옷 수 */}
+							<div>
+								<span className="fw-400 fs-18" style={{ lineHeight: '26.24px' }}>
+									옷장에{' '}
+									<span className="fw-500 fs-18" style={{ lineHeight: '32.8px' }}>
+										80
+									</span>
+									벌의 옷이 있습니다
+								</span>
 							</div>
-						</div>
-						{/* 옷 수 */}
-						<div>
-							<span>옷장에 80벌의 옷이 있습니다</span>
 						</div>
 					</div>
+					{/* 버튼 */}
+					<div
+						css={css`
+							display: flex;
+							flex-direction: row;
+							justify-content: center;
+							align-items: center;
+							padding: 14px;
+						`}
+					>
+						<Button
+							css={css`
+								display: flex;
+								justify-content: center;
+								align-items: center;
+								padding: 10px;
+								margin: 10px;
+								border: 2px solid ${colors.green100};
+								border-radius: 14px;
+								box-shadow: none;
+							`}
+							type="outlined"
+							label="Follow"
+						/>
+						<Button
+							css={css`
+								display: flex;
+								justify-content: center;
+								align-items: center;
+								padding: 10px;
+								margin: 10px;
+								border: 2px solid ${colors.green100};
+								border-radius: 14px;
+								box-shadow: none;
+							`}
+							type="outlined"
+							label="Message"
+						/>
+					</div>
 				</div>
-				{/* 버튼 */}
+				{/* 옷장 사진 */}
 				<div
 					css={css`
 						display: flex;
-						flex-direction: row;
-						justify-content: center;
-						align-items: center;
-						width: 80%;
-						border-radius: 14px;
+						flex-direction: column;
 					`}
 				>
-					<Button type="active" label="Follow" style={{ padding: 10 }} />
-					<Button type="active" label="Message" style={{ padding: 10 }} />
+					{/* 갤러리 1열 2장 */}
+					<div
+						css={css`
+							display: grid;
+							grid-template-columns: 1fr 1fr;
+							grid-template-rows: auto;
+							place-items: center;
+							gap: 10px;
+							padding: 10px;
+						`}
+					>
+						<img
+							css={css`
+								display: flex;
+								width: 100%;
+								height: 100%;
+							`}
+							src={gallery_img}
+							alt=""
+						/>
+					</div>
 				</div>
 			</div>
-			{/* 옷장 사진 */}
-			{/* <div
-				css={css`
-					position: relative;
-					display: flex;
-					flex-direction: column;
-				`}
-			>
-				<div
-					css={css`
-						align-items: stretch;
-						box-sizing: border-box;
-						display: flex;
-						flex-direction: row;
-						flex-shrink: 0;
-						position: relative;
-					`}
-				>
-					<img src={article_img} alt="" />
-					<img src={article_img} alt="" />
-				</div>
-				<div>
-					<img src={article_img} alt="" />
-					<img src={article_img} alt="" />
-				</div>
-			</div> */}
 			<BottomNavigation />
 		</>
 	);
 };
 
 export default ProfileUser;
+
 
 ```
 

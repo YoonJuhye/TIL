@@ -82,14 +82,15 @@
 
 #### Variable
 
-- let (added in ES6) : Mutable datatype
-- Block Scope : 블록 안에서 선언된 변수는 밖에서 접근할 수 없게 됨
+- 어플리케이션이 실행되면 어플리케이션이 쓸 수 있는 메모리가 제한적으로 할당됨.
 
+- let (added in ES6) : Mutable datatype 
+- Block Scope : 블록 안에서 선언된 변수는 밖에서 접근할 수 없게 됨
 - var (don't ever use this!)
   - var hoisting : 어디에 선언했느냐와 상관 없이 항상 제일 위로 선언을 끌어올려주는 것을 말함.
-  - 블록 스코핑이 없음. 어디에서나 접근 가능
-
- 
+  - 선언도 하기 전에 값을 할당, 출력 가능함.
+  - 블록 스코핑이 없음. 어디에서나 접근 가능(블록 안에서 변수를 선언해도 밖에서 접근 가능함)
+  - 규모 있는 프로젝트에서는 선언하지 않은 값이 할당되는 단점 -> let 등장 
 
 #### Constants
 
